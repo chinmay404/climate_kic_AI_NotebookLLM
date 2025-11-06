@@ -1,0 +1,57 @@
+import { useMemo } from "react";
+import { OnyxIcon, OnyxLogoTypeIcon } from "@/components/icons/icons";
+import { useSettingsContext } from "@/components/settings/SettingsProvider";
+import { NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+import Text from "@/refresh-components/texts/Text";
+
+const FOLDED_SIZE = 24;
+
+export interface LogoProps {
+  folded?: boolean;
+  className?: string;
+}
+
+export default function Logo({ folded, className }: LogoProps) {
+  const settings = useSettingsContext();
+
+  const logoSrc = settings.enterpriseSettings?.use_custom_logo 
+    ? "/api/enterprise-settings/logo"
+    : "/climate-kic-logo.png";
+
+  const logo = useMemo(
+    () => (
+      <img
+        src={logoSrc}
+        alt="Climate KIC Logo"
+        style={{
+          objectFit: "contain",
+          height: FOLDED_SIZE,
+          width: FOLDED_SIZE,
+        }}
+        className={cn("flex-shrink-0", className)}
+      />
+    ),
+    [className, logoSrc]
+  );
+
+  if (folded) return logo;
+
+  return settings.enterpriseSettings?.application_name ? (
+    <div className="flex flex-col">
+      <div className="flex flex-row items-center gap-2">
+        {logo}
+        <Text headingH3 className="break-all line-clamp-2">
+          {settings.enterpriseSettings?.application_name}
+        </Text>
+      </div>
+    </div>
+  ) : (
+    <div className="flex flex-row items-center gap-2">
+      {logo}
+      <Text headingH3 className="break-all line-clamp-2">
+        Climate KIC
+      </Text>
+    </div>
+  );
+}
