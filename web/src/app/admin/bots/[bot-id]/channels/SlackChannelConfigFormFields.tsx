@@ -464,10 +464,12 @@ export function SlackChannelConfigFormFields({
                     ]}
                   />
                 </div>
-              name="enable_auto_filters"
-              label="Answer from All Public Sources"
-              sublabel="Let Climate KIC Bot respond based on information from all public connectors"
-            />                <CheckFormField
+                <CheckFormField
+                  name="enable_auto_filters"
+                  label="Answer from All Public Sources"
+                  sublabel="Let Climate KIC Bot respond based on information from all public connectors"
+                />
+                <CheckFormField
                   name="answer_validity_check_enabled"
                   label="Only respond if citations found"
                   tooltip="If set, will only answer questions where the model successfully produces citations"
