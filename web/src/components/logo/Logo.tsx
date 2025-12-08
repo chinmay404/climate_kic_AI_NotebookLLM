@@ -34,9 +34,10 @@ export function Logo({
   ) {
     return (
       <div style={{ height, width }} className={className}>
-        <OnyxIcon
-          size={height}
-          className={`${className} dark:text-[#fff] text-[#000]`}
+        <img
+          src="/logo.png"
+          alt="Logo"
+          className={`${className} object-contain h-full w-full`}
         />
       </div>
     );

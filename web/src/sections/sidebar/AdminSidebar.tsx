@@ -80,7 +80,7 @@ const custom_assistants_items = (
   const items = [
     {
       name: "Assistants",
-      icon: SvgOnyxOctagon,
+      icon: BrainIcon,
       link: "/admin/assistants",
     },
   ];
@@ -158,7 +158,7 @@ const collections = (
           items: [
             {
               name: "Default Assistant",
-              icon: OnyxLogo,
+              icon: BrainIcon,
               link: "/admin/configuration/default-assistant",
             },
             {
@@ -341,7 +341,7 @@ export default function AdminSidebar({
           <div className="flex flex-col gap-2">
             {settings.webVersion && (
               <Text text02 secondaryBody className="px-2">
-                {`Onyx version: ${settings.webVersion}`}
+                {`Version: ${settings.webVersion}`}
               </Text>
             )}
             <Settings />
