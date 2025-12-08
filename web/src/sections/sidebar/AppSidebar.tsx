@@ -37,7 +37,7 @@ import { useProjects } from "@/lib/hooks/useProjects";
 import { useAgents, usePinnedAgentsWithDetails } from "@/lib/hooks/useAgents";
 import { useAppSidebarContext } from "@/refresh-components/contexts/AppSidebarContext";
 import SvgFolderPlus from "@/icons/folder-plus";
-import SvgOnyxOctagon from "@/icons/onyx-octagon";
+import { BrainIcon } from "@/components/icons/icons";
 import ProjectFolderButton from "@/sections/sidebar/ProjectFolderButton";
 import CreateProjectModal from "@/components/modals/CreateProjectModal";
 import MoveCustomAgentChatModal from "@/components/modals/MoveCustomAgentChatModal";
@@ -397,7 +397,7 @@ function AppSidebarInner({ folded, onFoldClick }: AppSidebarInnerProps) {
         <SidebarTab
           leftIcon={
             folded || visibleAgents.length === 0
-              ? SvgOnyxOctagon
+              ? BrainIcon
               : SvgMoreHorizontal
           }
           href="/chat/agents"

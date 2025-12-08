@@ -30,8 +30,14 @@ export default function Logo({ folded, className }: LogoProps) {
           className={cn("flex-shrink-0", className)}
         />
       ) : (
-        <OnyxIcon
-          size={FOLDED_SIZE}
+        <img
+          src="/logo.png"
+          alt="Logo"
+          style={{
+            objectFit: "contain",
+            height: FOLDED_SIZE,
+            width: FOLDED_SIZE,
+          }}
           className={cn("flex-shrink-0", className)}
         />
       ),
@@ -65,8 +71,31 @@ export default function Logo({ folded, className }: LogoProps) {
       )}
     </div>
   ) : folded ? (
-    <OnyxIcon size={FOLDED_SIZE} className={cn("flex-shrink-0", className)} />
+    <img
+      src="/logo.png"
+      alt="Logo"
+      style={{
+        objectFit: "contain",
+        height: FOLDED_SIZE,
+        width: FOLDED_SIZE,
+      }}
+      className={cn("flex-shrink-0", className)}
+    />
   ) : (
-    <OnyxLogoTypeIcon size={UNFOLDED_SIZE} className={className} />
+    <div className="flex items-center gap-2">
+      <img
+        src="/logo.png"
+        alt="Logo"
+        style={{
+          objectFit: "contain",
+          height: 32,
+          width: 32,
+        }}
+        className={cn("flex-shrink-0", className)}
+      />
+      <h1 className="text-xl font-bold text-text-900 dark:text-text-100">
+        Climate KIC AI
+      </h1>
+    </div>
   );
 }
