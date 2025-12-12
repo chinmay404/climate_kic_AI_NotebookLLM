@@ -481,11 +481,14 @@ class LitellmLLM(LLM):
         )
 
         # Needed to get reasoning tokens from the model
+        api_version_to_use = self._api_version
         if not is_legacy_langchain and (
             is_true_openai_model(self.config.model_provider, self.config.model_name)
             or self.config.model_provider == AZURE_PROVIDER_NAME
         ):
             model_provider = f"{self.config.model_provider}/responses"
+            if self.config.model_provider == AZURE_PROVIDER_NAME:
+                api_version_to_use = "2025-03-01-preview"
         else:
             model_provider = self.config.model_provider
 
@@ -499,7 +502,7 @@ class LitellmLLM(LLM):
                 # otherwise litellm can have some issues with bedrock
                 api_key=self._api_key or None,
                 base_url=self._api_base or None,
-                api_version=self._api_version or None,
+                api_version=api_version_to_use or None,
                 custom_llm_provider=self._custom_llm_provider or None,
                 # actual input
                 messages=processed_prompt,
