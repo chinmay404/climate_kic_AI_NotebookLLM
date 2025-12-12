@@ -489,15 +489,6 @@ class LitellmLLM(LLM):
         else:
             model_provider = self.config.model_provider
 
-        # Azure Responses API requires api-version 2025-03-01-preview or later
-        # Override the api_version if using Azure with Responses API
-        effective_api_version = self._api_version
-        if (
-            self.config.model_provider == AZURE_PROVIDER_NAME
-            and not is_legacy_langchain
-        ):
-            effective_api_version = "2025-03-01-preview"
-
         try:
             return litellm.completion(
                 mock_response=MOCK_LLM_RESPONSE,
@@ -508,7 +499,7 @@ class LitellmLLM(LLM):
                 # otherwise litellm can have some issues with bedrock
                 api_key=self._api_key or None,
                 base_url=self._api_base or None,
-                api_version=effective_api_version or None,
+                api_version=self._api_version or None,
                 custom_llm_provider=self._custom_llm_provider or None,
                 # actual input
                 messages=processed_prompt,
@@ -554,6 +545,7 @@ class LitellmLLM(LLM):
                     if reasoning_effort
                     and is_reasoning
                     and "claude" not in self.config.model_name.lower()
+                    and self.config.model_provider != AZURE_PROVIDER_NAME
                     else {}
                 ),
                 **(
