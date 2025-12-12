@@ -1,3 +1,4 @@
+import io
 import json
 import re
 from collections.abc import Callable
@@ -38,6 +39,7 @@ from onyx.db.models import Tool
 from onyx.db.models import User
 from onyx.db.models import UserFile
 from onyx.db.search_settings import get_current_search_settings
+from onyx.file_processing.extract_file_text import extract_text_and_images
 from onyx.file_store.file_store import get_default_file_store
 from onyx.file_store.models import ChatFileType
 from onyx.file_store.models import FileDescriptor
@@ -478,7 +480,21 @@ def load_chat_file(
     # Extract text content if it's a text file type (not an image)
     content_text = None
     file_type = file_descriptor["type"]
-    if file_type.is_text_file():
+    
+    if file_type == ChatFileType.DOC:
+        try:
+            # Create a BytesIO object from content
+            file_io_bytes = io.BytesIO(content)
+            extraction_result = extract_text_and_images(
+                file=file_io_bytes,
+                file_name=file_descriptor.get("name") or "",
+            )
+            content_text = extraction_result.text_content
+        except Exception as e:
+            logger.warning(
+                f"Failed to extract text from DOC file {file_descriptor['id']}: {e}"
+            )
+    elif file_type.is_text_file():
         try:
             content_text = content.decode("utf-8")
         except UnicodeDecodeError:
