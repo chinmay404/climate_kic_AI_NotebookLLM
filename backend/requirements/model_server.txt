@@ -2095,9 +2095,9 @@ sniffio==1.3.1 \
     # via
     #   anyio
     #   openai
-sse-starlette==3.0.3 \
-    --hash=sha256:88cfb08747e16200ea990c8ca876b03910a23b547ab3bd764c0d8eb81019b971 \
-    --hash=sha256:af5bf5a6f3933df1d9c7f8539633dc8444ca6a97ab2e2a7cd3b6e431ac03a431
+sse-starlette==3.4.1 \
+    --hash=sha256:6b43cf21f1d574d582a6e1b0cfbde1c94dc86a32a701a7168c99c4475c6bd1d0 \
+    --hash=sha256:f780bebcf6c8997fe514e3bd8e8c648d8284976b391c8bed0bcb1f611632b555
     # via mcp
 starlette==0.49.3 \
     --hash=sha256:1c14546f299b5901a1ea0e34410575bc33bbd741377a10484a54445588d00284 \
