@@ -514,10 +514,11 @@ class LitellmLLM(LLM):
             and reasoning_effort != ReasoningEffort.OFF
             and not is_vertex_model_rejecting_output_config
         ):
-            if is_openai_model:
+            if is_openai_model and self.config.model_provider != LlmProviderNames.AZURE:
                 # OpenAI API does not accept reasoning params for GPT 5 chat models
                 # (neither reasoning nor reasoning_effort are accepted)
                 # even though they are reasoning models (bug in OpenAI)
+                # Azure does not support the reasoning/summary parameter format
                 if "-chat" not in model:
                     optional_kwargs["reasoning"] = {
                         "effort": OPENAI_REASONING_EFFORT[reasoning_effort],
@@ -601,6 +602,14 @@ class LitellmLLM(LLM):
             user_identity=user_identity,
         )
 
+        # Azure Responses API requires api-version 2025-03-01-preview or later
+        api_version_to_use = self._api_version
+        if (
+            self.config.model_provider == LlmProviderNames.AZURE
+            and is_openai_model
+        ):
+            api_version_to_use = "2025-03-01-preview"
+
         try:
             # NOTE: must pass in None instead of empty strings otherwise litellm
             # can have some issues with bedrock.
@@ -655,7 +664,7 @@ class LitellmLLM(LLM):
                     mock_response=get_llm_mock_response() or MOCK_LLM_RESPONSE,
                     model=model,
                     base_url=self._api_base or None,
-                    api_version=self._api_version or None,
+                    api_version=api_version_to_use or None,
                     custom_llm_provider=self._custom_llm_provider or None,
                     messages=messages,
                     tools=tools,

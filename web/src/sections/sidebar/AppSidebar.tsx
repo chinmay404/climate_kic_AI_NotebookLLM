@@ -61,7 +61,6 @@ import {
   SvgEditBig,
   SvgFolderPlus,
   SvgMoreHorizontal,
-  SvgOnyxOctagon,
   SvgSearchMenu,
   SvgSettings,
 } from "@opal/icons";
@@ -544,7 +543,7 @@ const MemoizedAppSidebarInner = memo(function AppSidebarInner() {
         <SidebarTab
           icon={
             folded || visibleAgents.length === 0
-              ? SvgOnyxOctagon
+              ? SvgDevKit
               : SvgMoreHorizontal
           }
           href="/app/agents"

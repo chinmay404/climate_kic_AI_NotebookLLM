@@ -9,7 +9,6 @@ import { cn } from "@opal/utils";
 import Text from "@/refresh-components/texts/Text";
 import Truncated from "@/refresh-components/texts/Truncated";
 import { useMemo } from "react";
-import { SvgOnyxLogo, SvgOnyxLogoTyped } from "@opal/logos";
 
 export interface LogoProps {
   folded?: boolean;
@@ -50,8 +49,11 @@ export default function Logo({ folded, size, className }: LogoProps) {
       />
     </div>
   ) : (
-    <SvgOnyxLogo
-      size={resolvedSize}
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/logo.png"
+      alt="Logo"
+      style={{ objectFit: "contain", height: resolvedSize, width: resolvedSize }}
       className={cn("flex-shrink-0", className)}
     />
   );
@@ -99,11 +101,25 @@ export default function Logo({ folded, size, className }: LogoProps) {
   return applicationName ? (
     renderNameAndPoweredBy({ includeLogo: true, includeName: true })
   ) : folded ? (
-    <SvgOnyxLogo
-      size={resolvedSize}
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/logo.png"
+      alt="Logo"
+      style={{ objectFit: "contain", height: resolvedSize, width: resolvedSize }}
       className={cn("flex-shrink-0", className)}
     />
   ) : (
-    <SvgOnyxLogoTyped size={resolvedSize} className={className} />
+    <div className="flex items-center gap-2">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/logo.png"
+        alt="Logo"
+        style={{ objectFit: "contain", height: 32, width: 32 }}
+        className={cn("flex-shrink-0")}
+      />
+      <h1 className="text-xl font-bold text-text-900 dark:text-text-100">
+        Climate KIC AI
+      </h1>
+    </div>
   );
 }

@@ -526,8 +526,8 @@ export default function MCPAuthenticationModal({
                         </Text>
                         <Text as="p" text03 secondaryBody>
                           If your server does not support DCR, you need register
-                          your Onyx instance with the server provider to obtain
-                          these credentials first. Make sure to grant Onyx
+                          your Climate KIC AI instance with the server provider to obtain
+                          these credentials first. Make sure to grant Climate KIC AI
                           necessary scopes/permissions for your actions.
                         </Text>
 

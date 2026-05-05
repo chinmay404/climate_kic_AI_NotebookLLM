@@ -75,7 +75,10 @@ services:
     #   - "8080:8080"
     environment:
       # Auth Settings
-      - AUTH_TYPE=${AUTH_TYPE:-basic}
+      - AUTH_TYPE=${AUTH_TYPE:-oidc}
+      - OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID}
+      - OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}
+      - OPENID_CONFIG_URL=${OPENID_CONFIG_URL}
       - FILE_STORE_BACKEND=${FILE_STORE_BACKEND:-s3}
       - POSTGRES_HOST=${POSTGRES_HOST:-relational_db}
       - VESPA_HOST=${VESPA_HOST:-index}
@@ -158,6 +161,10 @@ services:
         condition: service_started
     restart: unless-stopped
     environment:
+      - AUTH_TYPE=${AUTH_TYPE:-oidc}
+      - OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID}
+      - OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}
+      - OPENID_CONFIG_URL=${OPENID_CONFIG_URL}
       - FILE_STORE_BACKEND=${FILE_STORE_BACKEND:-s3}
       - POSTGRES_HOST=${POSTGRES_HOST:-relational_db}
       - VESPA_HOST=${VESPA_HOST:-index}
