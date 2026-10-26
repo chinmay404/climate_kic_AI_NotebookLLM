@@ -3397,9 +3397,9 @@ six==1.17.0 \
     #   markdownify
     #   python-dateutil
     #   stone
-slack-sdk==3.20.2 \
-    --hash=sha256:224fcb4fef9575226e76555d9a0acdbd93d7596a416bc3ae7b443b3b64e9f0e3 \
-    --hash=sha256:f61db1f6e49dd2ee84e82ddb5d1c5db7a5987b8be9ba975dc00799334c84f8cd
+slack-sdk==3.45.0 \
+    --hash=sha256:1ab794452f238b59db0d8a4d346263d65190288add53ec67a05751d8e7402486 \
+    --hash=sha256:6356d4486d1a3ad156462c5544ab1b9c076ff426a250495c08f51b7ad71eb8fb
 smmap==5.0.2 \
     --hash=sha256:26ea65a03958fa0c8a1c7e8c7a58fdc77221b8910f6be2131affade476898ad5 \
     --hash=sha256:b30115f0def7d7531d22a0fb6502488d879e75b260a9db4d0819cfb25403af5e
